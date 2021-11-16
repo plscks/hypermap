@@ -1,0 +1,29 @@
+name: Update Version Cachebust
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - run: echo "The ${{ github.repository }} repository ${{github.ref}} branch has been cloned to the runner."
+      - run: echo "Running version change action....."
+      - name: Set env
+        run: echo "VERSION=$(((RND=RANDOM<<15|RANDOM)) ; echo ${RND:-6})" >> $GITHUB_ENV
+      - name: Replace placeholder with number
+        run: |
+          sed -i 's/{{VERSION}}/'$VERSION'/g' index.html
+      - name: Was it changed?
+        run: cat hypermap.html
+      - name: Commit and push changes
+        run: |
+            git config --global user.name "plscks"
+            git config --global user.email "plscks@iCloud.com"
+
+            git add -A
+            git commit -m "Updating versions for deployment"
+            git push -f origin HEAD:live
+      - run: echo "🍏 This job's status is ${{ job.status }}."
