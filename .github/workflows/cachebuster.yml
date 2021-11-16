@@ -3,8 +3,11 @@ on:
   pull_request:
     branches:
       - main
+    types: [ closed ]
+
 jobs:
-  Explore-GitHub-Actions:
+  Update-pages-after-merge:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -17,7 +20,7 @@ jobs:
         run: |
           sed -i 's/{{VERSION}}/'$VERSION'/g' index.html
       - name: Was it changed?
-        run: cat hypermap.html
+        run: tail -3 index.html
       - name: Commit and push changes
         run: |
             git config --global user.name "plscks"
