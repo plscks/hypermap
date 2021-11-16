@@ -17,7 +17,7 @@ jobs:
         run: |
           sed -i 's/{{VERSION}}/'$VERSION'/g' index.html
       - name: Was it changed?
-        run: cat hypermap.html
+        run: cat index.html
       - name: Commit and push changes
         run: |
             git config --global user.name "plscks"
