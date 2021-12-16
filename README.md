@@ -31,4 +31,4 @@ That said, there may be something of a project that comes up in which tile icons
 I think this would be pretty cool, but have not worked anything specific out for it up to this point. The javascript for
 map is also on this repository if anyone is interested in contributing towards that part of the project.
 
-Thank you again, you are all a wonderful community!
+Thank you again, you are all a wonderful community!!
